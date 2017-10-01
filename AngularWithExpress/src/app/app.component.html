@@ -1,0 +1,45 @@
+<div class="contaienr">
+<div class="row">
+  <div class="col s6">
+    <div class="container">
+    <h5>Users</h5>
+      <div  style="cursor:pointer; width:100%; border:1px solid #ddd; display:flex; justify-content:space-around; flex-flow:wrap; ">
+        <div *ngFor="let user of users" style="width:45%; " class="center-align card-panel teal hoverable waves-effect" (click)="optenerUser(user)">
+          <span class="white-text" >{{user.nombre}}
+          </span>        
+        </div>
+    </div>
+  </div>
+</div>
+  <div class="col s6">
+    <div class="container">
+    <div class="row">
+      <div class=" col s6">
+          <label class="" for="first_name2">Nombre</label>
+        <input id="first_name2" type="text" class="validate" [(ngModel)]="userEdit.nombre" >
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class=" col s6">
+          <label class="" for="first_name2">Edad</label>
+        <input id="first_name2" type="text" class="" [(ngModel)]="userEdit.edad">
+       
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s6">
+          <label class="" for="first_name2">Genero</label>
+        <input id="first_name2" type="text" class="validate" [(ngModel)]="userEdit.genero">
+       
+      </div>
+    </div>
+
+    <a class="waves-effect waves-light btn" (click)="agregarUser()"><i class="material-icons right">cloud</i>Agregar</a>
+    <a class="waves-effect waves-light btn" (click)="guardarUser()"><i class="material-icons right">cloud</i>Guardar</a>
+    <a class="waves-effect red waves-light btn" (click)="eliminarUser()"><i class="material-icons right">cloud</i>Eliminar</a>
+
+  </div>
+</div>
+</div>
+</div>

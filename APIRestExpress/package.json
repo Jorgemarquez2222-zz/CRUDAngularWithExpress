@@ -1,0 +1,20 @@
+{
+  "name": "apirestexpress",
+  "version": "1.0.0",
+  "description": "Api Rest express CRUD",
+  "main": "nodemon app.js",
+  "start": "nodemon app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.15.5",
+    "mongoose": "^4.11.13",
+    "nodemon": "^1.12.1",
+    "request": "^2.83.0"
+  }
+}
