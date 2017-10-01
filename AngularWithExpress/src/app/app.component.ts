@@ -1,23 +1,46 @@
-import { Component } from '@angular/core';
-import { ServicesUserService } from './services/services-user.service' 
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { ServicesUserService } from './services/services-user.service';
+import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
 
+declare var jQuery:any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit{
   users : any;
   userEdit: any;
-  constructor( public _servicesUserService: ServicesUserService ){
+  registerForm: FormGroup;
+  
+  formValues: any;
+  constructor(private fb: FormBuilder, private _elRef: ElementRef, public _servicesUserService: ServicesUserService ){
+     
     this.userEdit ={
       nombre : '',
       edad: '',
       genero: ''
     }
+    this.getUsers()
+  }
+  ngOnInit(){
+    jQuery(this._elRef.nativeElement).find('.modal').modal();
+    this.registerForm = this.fb.group({
+      user: this.fb.group({
+        nombre: [],
+        edad: ['', Validators.required],
+        genero: ['', Validators.required],
+    }),
+    });
+  }
+  submitForm(){
+    console.log('click submit');
+    this.formValues = this.registerForm.value.user;
+  }
+  getUsers(){
     this._servicesUserService.getUsers().subscribe(
-      res => this.users = res
-    )
+          res => this.users = res
+      )
   }
   optenerUser(user){
     this._servicesUserService.getUserById(user._id).subscribe(
@@ -27,19 +50,18 @@ export class AppComponent {
   guardarUser(){
     this._servicesUserService.updateUser(this.userEdit).subscribe(
       res => {console.log( res)
-          this._servicesUserService.getUsers().subscribe(
-          res=> this.users =  res
-        )
+         this.getUsers();
       }
     )
   }
   agregarUser(){
-    console.log(this.userEdit)
-    this._servicesUserService.addUser(this.userEdit).subscribe(
+   
+     this.formValues = this.registerForm.value.user;
+    this._servicesUserService.addUser(this.formValues).subscribe(
       res => {
-        this._servicesUserService.getUsers().subscribe(
-          res=> this.users =  res
-        )
+         this.getUsers();  
+         
+
       }
     ) 
   }
@@ -47,9 +69,7 @@ export class AppComponent {
     console.log(this.userEdit)
     this._servicesUserService.deleteUser(this.userEdit._id).subscribe(
       res => {
-          this._servicesUserService.getUsers().subscribe(
-          res=> this.users =  res
-        )
+          this.getUsers();
       }
     ) 
   }
