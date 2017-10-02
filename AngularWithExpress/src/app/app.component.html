@@ -3,6 +3,9 @@
   <div class="col s6">
     <div class="container">
     <h5>Users</h5>
+    <button type="" (click)="getUserForRole('1')">Nivel 1</button>
+    <button type="" (click)="getUserForRole('59d16c6cf36d286c005d2f71')">Nivel 2</button>
+
       <div  style="cursor:pointer; width:100%; border:1px solid #ddd; display:flex; justify-content:space-around; flex-flow:wrap; ">
         <div *ngFor="let user of users" style="width:45%; " class="center-align card-panel teal hoverable waves-effect" (click)="optenerUser(user)">
           <span class="white-text" >{{user.nombre}}

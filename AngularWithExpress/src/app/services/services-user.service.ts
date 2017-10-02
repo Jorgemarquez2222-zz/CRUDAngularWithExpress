@@ -51,4 +51,7 @@ export class ServicesUserService {
     }
     );
   }
+  getUserForRole(nivel){
+     return this._http.get(this.url+"role/"+ nivel ).map(res => res.json()); 
+  }
 }

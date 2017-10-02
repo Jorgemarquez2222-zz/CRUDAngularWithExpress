@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 User = require('./models/user')
+Role = require('./models/role')
 var cors = require('cors');
 
 app.use(bodyParser.json())
@@ -22,8 +23,22 @@ app.get('/users', function(req, res){
         } else {
             res.json(users)
         }
-      });
+     });
 });
+
+app.get('/users/role/:role', function(req, res){
+    User.find({}, function(err, users) {
+    	Role.populate(users, {path: "role"},function(err, roles){
+        	res.json(roles);
+        }); 
+    });
+})
+  // User.find({}, function(err, users) {
+  //   	Role.populate(users, {path: "role"},function(err, roles){
+  //       	res.json(roles);
+  //       }); 
+  //   }).where({nombre: "Carlos"});
+
 
 app.get('/users/:_id', function(req, res){
   User.getUserById(req.params._id,function (err, user) {

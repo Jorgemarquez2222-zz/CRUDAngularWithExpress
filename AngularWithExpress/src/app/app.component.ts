@@ -37,6 +37,11 @@ export class AppComponent  implements OnInit{
     console.log('click submit');
     this.formValues = this.registerForm.value.user;
   }
+  getUserForRole(nivel){
+    this._servicesUserService.getUserForRole(nivel).subscribe(
+          res => this.users = res
+      )
+  }
   getUsers(){
     this._servicesUserService.getUsers().subscribe(
           res => this.users = res

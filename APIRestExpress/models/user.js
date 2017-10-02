@@ -1,15 +1,29 @@
 var mongoose = require('mongoose');
+
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     nombre : String,
     edad   : Number,
-    genero : String
+    genero : String,
+    role: { type: Schema.ObjectId, ref: "Role" }
 });
 
 var User = module.exports = mongoose.model('User', userSchema)
+
+
+
 module.exports.getUsers = function(callback, limit){
+// User.findOne({ 'nombre': 'Jorge' }, 'nombre edad genero', function (err, person) {
+//   if (err) return handleError(err);
+//   console.log(person) // Space Ghost is a talk show host.
+// })
+
+
     User.find(callback).limit(limit)
+
+
+
 }
 module.exports.getUserById = function(id, callback){
     User.findById(id,callback)
