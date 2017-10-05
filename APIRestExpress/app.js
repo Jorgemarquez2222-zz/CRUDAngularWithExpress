@@ -26,11 +26,22 @@ app.get('/users', function(req, res){
      });
 });
 
-app.get('/users/role/:role', function(req, res){
-    User.find({}, function(err, users) {
-    	Role.populate(users, {path: "role"},function(err, roles){
-        	res.json(roles);
-        }); 
+app.get('/users/role', function(req, res){
+    // User.find({}, function(err, users) {
+    // 	Role.populate(users, {path: "role"},function(err, roles){
+    //     	res.json(roles);
+    //     }); 
+    // });
+    Role.
+    find({nivel : "1"}).
+    populate({path: 'users' }).
+    exec(function (err, role) {
+      if (err) return handleError(err);
+      // console.log( role[0].users);
+      role.forEach(function(element) {
+        console.log(element.users.nombre +"  "+element.users.edad + "  "+element.users.genero  );
+    });
+      // prints "The author is Ian Fleming"
     });
 })
   // User.find({}, function(err, users) {
